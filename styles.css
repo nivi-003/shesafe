@@ -1,0 +1,587 @@
+/* ============================================================
+   SheSafe — CSS Custom Properties & Base Styles
+   ============================================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  /* Primary palette — soft pink */
+  --color-primary: #E91E8C;
+  --color-primary-light: #F8BBD9;
+  --color-primary-dark: #C2185B;
+
+  /* Accent — soft green */
+  --color-accent: #4CAF82;
+  --color-accent-light: #C8E6D4;
+  --color-accent-dark: #388E5A;
+
+  /* Neutrals */
+  --color-bg: #FFF5F9;
+  --color-surface: #FFFFFF;
+  --color-text: #2D2D2D;
+  --color-text-muted: #6B6B6B;
+  --color-border: #F0D6E8;
+
+  /* Error */
+  --color-error: #D32F2F;
+  --color-error-light: #FFEBEE;
+
+  /* SOS / Emergency */
+  --color-sos: #D32F2F;
+  --color-sos-hover: #B71C1C;
+
+  /* Typography */
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(233, 30, 140, 0.08);
+  --shadow-md: 0 4px 16px rgba(233, 30, 140, 0.12);
+  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+}
+
+/* ============================================================
+   Navigation Bar
+   ============================================================ */
+
+/* Reset body margin so header sits flush at top */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-color: var(--color-surface);
+  border-bottom: 2px solid var(--color-primary-light);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-sm) var(--space-lg);
+  min-height: 56px;
+}
+
+.nav-brand {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Hamburger button — hidden on desktop, visible on mobile */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  padding: var(--space-xs);
+  line-height: 1;
+}
+
+/* Nav links — horizontal row on desktop */
+header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-lg);
+}
+
+header nav ul li a {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text);
+  text-decoration: none;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+  white-space: nowrap;
+}
+
+header nav ul li a:hover,
+header nav ul li a:focus {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  outline: none;
+}
+
+/* ============================================================
+   Responsive Nav — mobile (< 768px)
+   ============================================================ */
+
+@media (max-width: 767px) {
+  /* Show hamburger button */
+  .nav-toggle {
+    display: block;
+  }
+
+  /* Nav takes full width below brand + toggle row */
+  header nav {
+    width: 100%;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease;
+  }
+
+  /* When .nav-open is toggled on the nav, reveal links */
+  header nav.nav-open {
+    max-height: 400px;
+  }
+
+  header nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: var(--space-sm) 0;
+  }
+
+  header nav ul li a {
+    display: block;
+    padding: var(--space-sm) var(--space-md);
+    font-size: 1rem;
+  }
+}
+
+/* ============================================================
+   Hero Section (#home)
+   ============================================================ */
+
+#home {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 60%, var(--color-accent-dark) 100%);
+  padding: var(--space-3xl) var(--space-lg);
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+.hero-content h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 var(--space-md);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.hero-content .tagline {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 var(--space-xl);
+  line-height: 1.6;
+}
+
+/* Primary CTA button */
+.btn-primary {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  background-color: #ffffff;
+  text-decoration: none;
+  padding: var(--space-sm) var(--space-xl);
+  border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  outline: none;
+}
+
+/* ============================================================
+   Emergency Section (#emergency)
+   ============================================================ */
+
+#emergency {
+  background-color: #FFF0F0;
+  padding: var(--space-3xl) var(--space-lg);
+  text-align: center;
+}
+
+#emergency h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--color-sos);
+  margin: 0 0 var(--space-xl);
+}
+
+/* SOS Button */
+.sos-btn {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: var(--color-sos);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-lg) var(--space-3xl);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 20px rgba(211, 47, 47, 0.45);
+  transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  margin-bottom: var(--space-xl);
+}
+
+.sos-btn:hover,
+.sos-btn:focus {
+  background-color: var(--color-sos-hover);
+  transform: scale(1.04);
+  box-shadow: 0 8px 32px rgba(183, 28, 28, 0.55);
+  outline: none;
+}
+
+/* Emergency Contact Cards */
+.emergency-contacts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl) var(--space-lg);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.contact-label {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.contact-number {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-sos);
+  line-height: 1;
+}
+
+@media (max-width: 767px) {
+  .emergency-contacts {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+}
+
+/* ============================================================
+   Section Container Utility
+   ============================================================ */
+
+.section-container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--space-3xl) var(--space-lg);
+}
+
+/* ============================================================
+   Card Grid Layout
+   ============================================================ */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+@media (min-width: 768px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ============================================================
+   Safety_Card Component (.card)
+   ============================================================ */
+
+.card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
+
+/* Card icon area */
+.card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+/* Card title */
+.card-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin: 0;
+}
+
+/* Card tips list */
+.card-tips {
+  margin: 0;
+  padding-left: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.card-tips li {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+/* Card description text */
+.card-desc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   Safety Tips Section (#safety-tips)
+   ============================================================ */
+
+#safety-tips {
+  background-color: var(--color-bg);
+  padding: var(--space-3xl) 0;
+}
+
+/* ============================================================
+   Daily Tools Section (#daily-tools)
+   ============================================================ */
+
+#daily-tools {
+  background-color: var(--color-accent-light);
+  padding: var(--space-3xl) 0;
+}
+
+/* ============================================================
+   Section Headings (Safety Tips, Daily Tools, Contact)
+   ============================================================ */
+
+#safety-tips h2,
+#daily-tools h2,
+#contact h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin: 0 0 var(--space-xl);
+  text-align: center;
+}
+
+/* ============================================================
+   Contact Section (#contact)
+   ============================================================ */
+
+#contact {
+  background-color: var(--color-primary-light);
+  padding: var(--space-3xl) 0;
+}
+
+/* Contact form — centered, max-width constrained */
+#contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Form group — label stacked above input */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.form-group label {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* Input and textarea base styles */
+.form-group input,
+.form-group textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  width: 100%;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  outline: none;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(233, 30, 140, 0.15);
+}
+
+/* Error state — red border and error message text */
+.form-group.error input,
+.form-group.error textarea {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.12);
+}
+
+.form-group .error-msg {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--color-error);
+  margin: 0;
+}
+
+/* Success message */
+#form-success {
+  max-width: 600px;
+  margin: var(--space-xl) auto 0;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-accent-dark);
+  background-color: var(--color-accent-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg) var(--space-xl);
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+
+footer {
+  background-color: var(--color-primary-dark);
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* ============================================================
+   320px viewport — extra-small mobile polish
+   ============================================================ */
+
+@media (max-width: 359px) {
+  /* Prevent SOS button from overflowing on very narrow screens */
+  .sos-btn {
+    width: 100%;
+    padding: var(--space-lg) var(--space-md);
+    font-size: 1.2rem;
+    box-sizing: border-box;
+  }
+
+  /* Ensure section containers don't cause overflow */
+  .section-container {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+
+  /* Shrink hero heading slightly */
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+}
